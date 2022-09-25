@@ -1,36 +1,20 @@
 import React, {useState} from "react";
 
-// passSelectedCategory,
 function CategoryFilter({ setSelectedCategory, categories}) {
-  // const [keyClicked, setKeyClicked] = useState(0);
-  const [buttonClass, setButtonClass] = useState("");
+  
+  const [buttonClass, setButtonClass] = useState();
 
-
-  function handleClick(e, index) {
-    // e.preventDefault();
-    console.log(e.target.innerText)
-    // console.log("Key index", key);
+  function handleClick(category) {
     
-    setSelectedCategory(e.target.innerText);
+    setSelectedCategory(category);
     
-    // setKeyClicked(key);
-
-    // if(key === keyClicked) {
-    //   e.target.className = "selected";
-    // } else {
-    //   e.target.className = "";
-    // }
-
-    // buttonClass ? setButtonClass(() => "") : setButtonClass(() => "selected");
-    // console.log(selectedCategory)
-
-    // setSelectedCategory(() => (e.target.textContent));
+    setButtonClass(category);
     
   }
 
   function displayCategoryButtons() {
-    return categories.map((category,index) => (
-      <button key={category} className={buttonClass} onClick={(e) => handleClick(e, index)} >
+    return categories.map((category) => (
+      <button key={category} className={buttonClass === category ? "selected" : ""} onClick={() => handleClick(category)} >
           {category}
       </button>))
   }

@@ -1,26 +1,26 @@
 import React from "react";
 import Task from "./Task";
 
-function TaskList({selectedCategory, tasks}) {
+function TaskList({onDelete, selectedCategory, tasks}) {
 
   function filteredList() {
-    
-    if(selectedCategory === "All") {
-      return (
-        tasks.map((task,index) => (
-          <Task key={index} task={task} />
-        ))
-      )
-    } 
-    else {
-      return (tasks => (tasks.map((task,index) => (
-            <Task key={index} task={task} />
-      ))))(tasks.filter(task => task.category === selectedCategory))
-    }
 
-    // return tasks.map((task,index) => (
-    //   <Task key={index} task={task} />
-    // ))
+      if(selectedCategory === undefined || selectedCategory === "All") {
+        // Render all tasks at startup OR render all when "All" filter is clicked
+        return (
+          tasks.map((task,index) => (
+            <Task key={index} text={task.text} category={task.category} onDelete={onDelete} />
+          )) 
+        )
+      } 
+        else {
+          // Immediately invoked function expression to render tasks in a particular category
+          return (
+            (tasks => (tasks.map((task,index) => (
+                <Task key={index} text={task.text} category={task.category} onDelete={onDelete}/>
+          ))))(tasks.filter(task => task.category === selectedCategory)) 
+          )
+        }
   }
 
   return (

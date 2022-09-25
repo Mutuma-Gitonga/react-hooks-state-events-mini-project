@@ -15,7 +15,6 @@ function NewTaskForm({onTaskFormSubmit, categories}) {
 
     const newTask = {text, category};
 
-    console.log("In New task form",newTask);
     onTaskFormSubmit(newTask);
   }
 
